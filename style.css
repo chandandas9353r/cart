@@ -38,6 +38,9 @@ body{
 .container > input[type=submit]:hover,
 .container > input[type=submit]:active,
 .container > input[type=submit]:visited{
+    user-select: none;
+    shape-rendering: optimizeSpeed;
+    shape-outside: circle();
     background-color: #995CFA;
     color: white;
     cursor: pointer;
