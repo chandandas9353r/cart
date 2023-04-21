@@ -41,8 +41,8 @@ onValue(cartItem, function(snapshot){
 })
 
 function showContextMenu(e, display, selectedItem){
-    contextMenu.style.top = e.y + contextMenu.clientHeight > window.innerHeight ? window.innerHeight - contextMenu.clientHeight : e.y
-    contextMenu.style.left = e.x + contextMenu.clientWidth > window.innerWidth ? window.innerWidth - contextMenu.clientWidth : e.x
+    contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight : e.y
+    contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth : e.x
     contextMenu.style.display = display
     var option = document.querySelectorAll('.context-menu > #items > li')
     option.forEach(element => element.addEventListener('click', () => (element.innerHTML.toLowerCase() == 'update') ? updateItem() : deleteItem(selectedItem)));
