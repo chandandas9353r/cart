@@ -51,6 +51,7 @@ function showContextMenu(e, display, selectedItem){
         element.addEventListener('click', function(){
             if(element.innerHTML == 'Update') updateItem()
             else deleteItem(selectedItem)
+            return
         })
     });
 }
