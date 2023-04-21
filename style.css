@@ -36,7 +36,7 @@ body{
 }
 .container > input[type=submit]{
     background-color: #995CFA;
-    color: #FF0033;
+    color: white;
     cursor: pointer;
 }
 .container > #cart-items{
