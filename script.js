@@ -74,5 +74,9 @@ document.getElementById('submitBtn').addEventListener('click', function(){
         push(cartItem,item.value)
         item.value = ""
         item.focus()
+        item.click()
     }
 })
+
+item.focus()
+item.click()
