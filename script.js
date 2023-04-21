@@ -30,9 +30,7 @@ onValue(cartItem, function(snapshot){
             listElement.addEventListener('contextmenu', function(e){
                 e.preventDefault()
                 showContextMenu(e,"block",itemIds[i])
-                window.addEventListener('click', function(){
-                    contextMenu.style.display = display
-                })
+                window.addEventListener('click', () => contextMenu.style.display = 'none')
             })
         }
     }
@@ -47,13 +45,7 @@ function showContextMenu(e, display, selectedItem){
     contextMenu.style.left = e.x + contextMenu.clientWidth > window.innerWidth ? window.innerWidth - contextMenu.clientWidth : e.x
     contextMenu.style.display = display
     var option = document.querySelectorAll('.context-menu > #items > li')
-    option.forEach(element => {
-        element.addEventListener('click', function(){
-            if(element.innerHTML == 'Update') updateItem()
-            else deleteItem(selectedItem)
-            return
-        })
-    });
+    option.forEach(element => element.addEventListener('click', () => (element.innerHTML.toLowerCase() == 'update') ? updateItem() : deleteItem(selectedItem)));
 }
 
 function updateItem(){

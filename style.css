@@ -42,6 +42,7 @@ body{
 .container > #cart-items{
     display: flex;
     margin: 0px;
+    padding: 0px;
     list-style-type: none;
     text-align: center;
     flex-wrap: wrap;
