@@ -43,6 +43,7 @@ onValue(cartItem, function(snapshot){
         delBtn.innerHTML = '&#9940;'
         division.append(msgBox,delBtn)
         listElement.append(division)
+        if(i%2 != 0) listElement.style.backgroundColor = 'yellow'
         cart_items.append(listElement)
         delBtn.addEventListener('click', function(){
             remove(ref(database,`cart/${itemIds[i]}/`))

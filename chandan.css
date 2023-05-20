@@ -43,7 +43,7 @@ body{
     cursor: default;
 }
 .container > #cart-items > li{
-    background-color: lightgreen;
+    background-color: greenyellow;
     border-radius: 10px;
     word-break: break-all;
 }
