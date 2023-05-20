@@ -16,6 +16,7 @@ body{
     max-width: 150px;
     margin: 0px auto;
 }
+.container > #questionsList,
 .container > input{
     border: 0px;
     border-radius: 20px;
@@ -23,9 +24,16 @@ body{
     font-size: 20px;
     font-weight: bolder;
 }
+.container > #questionsList,
 .container > input[type=text]{
     background-color: #F0F0F0;
     color: #CCAAF7;
+}
+.container > #questionsList,
+.container > #questionsList > option{
+    width: 100%;
+    overflow-wrap: break-word;
+    overflow: hidden;
 }
 .container > input[type=submit]{
     background-color: #995CFA;
@@ -43,7 +51,7 @@ body{
     cursor: default;
 }
 .container > #cart-items > li{
-    background-color: greenyellow;
+    background-color: lightgreen;
     border-radius: 10px;
     word-break: break-all;
 }

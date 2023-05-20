@@ -2,19 +2,45 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Cart</title>
-        <link rel="stylesheet" href="style.css" type="text/css">
+        <link rel="stylesheet" href="chandan.css" type="text/css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
         <link rel="manifest" href="site.webmanifest">
-        <script src="script.js" type="module"></script>
+        <!-- <script src="script.js" type="module"></script> -->
     </head>
     <body>
         <div class="container">
-            <img src="./cute-cat.gif"></img>
+            <img src="./cute-cat.gif">
+            <select id="questionsList">
+                <option value="" hidden selected>Choose</option>
+                <option value="Question1">Question1Question1Question1Question1Question1Question1</option>
+                <option value="Question2">Question2</option>
+            </select>
             <input type="text" name="cartValue" id="cartValue" placeholder="Cart Item" autocomplete="off">
             <input type="submit" id="submitBtn" value="Add to Cart">
-            <ul id="cart-items"></ul>
+            <ul id="cart-items">
+                <li>
+                    <div>
+                        <span>Question1</span>
+                        <span>&#9940;</span>
+                    </div>
+                    <div>
+                        <span>Answer1</span>
+                        <span>&#9940;</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span>Question2</span>
+                        <span>&#9940;</span>
+                    </div>
+                    <div>
+                        <span>Answer2</span>
+                        <span>&#9940;</span>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="hideContainer">
             <button id="hideBtn">
