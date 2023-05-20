@@ -53,9 +53,11 @@ onValue(cartItem, function(snapshot){
 document.getElementById('hideBtn').addEventListener('click', function(){
     document.querySelector('.container').style.display = 'none'
     document.querySelector('.hideContainer').style.display = 'none'
-    document.write('<img src="./cute-cat.gif"></img>')
+    let image = document.createElement('img')
+    image.src = './cute-cat.gif'
+    document.body.append(image)
     document.body.style.display = 'flex'
     document.body.style.justifyContent = 'center'
     document.body.style.alignItems = 'center'
-    document.querySelector('img').style.maxWidth = '150px'
+    image.style.maxWidth = '150px'
 })
