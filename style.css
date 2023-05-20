@@ -45,11 +45,14 @@ body{
 .container > #cart-items > li{
     background-color: greenyellow;
     border-radius: 10px;
+    word-break: break-all;
+    width: 100%;
 }
 .container > #cart-items > li > div{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: left;
 }
 .container > #cart-items > li > div > *{
     color: black;
