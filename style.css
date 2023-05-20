@@ -7,8 +7,6 @@ body{
     display: flex;
     gap: 10px;
     flex-direction: column;
-    /* max-width: 320px;
-    min-width: 320px; */
 }
 .container,
 .container > *{
@@ -43,11 +41,18 @@ body{
     gap: 10px;
     cursor: default;
 }
-.container > #cart-items > *{
-    color: black;
-    padding: 10px;
+.container > #cart-items > li{
     background-color: greenyellow;
     border-radius: 10px;
+}
+.container > #cart-items > li > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container > #cart-items > li > div > *{
+    color: black;
+    padding: 10px;
     cursor: pointer;
 }
 .hideContainer{
@@ -58,10 +63,9 @@ body{
     right: 10px;
     bottom: 10px;
 }
-.hideContainer > #hide{
+.hideContainer > #hideBtn{
     position: relative;
-    /* margin: 10px; */
-    padding: 20px;
+    padding: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,7 +73,7 @@ body{
     border: 0px;
     border-radius: 10px;
 }
-.hideContainer > #hide > img{
+.hideContainer > #hideBtn > img{
     position: absolute;
     width: 80%;
 }

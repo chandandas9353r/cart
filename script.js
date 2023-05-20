@@ -14,8 +14,8 @@ const appSettings = {
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const cartItem = ref(database, "cart")
-var item = document.getElementById('cartValue')
-var cart_items = document.getElementById('cart-items')
+let item = document.getElementById('cartValue')
+let cart_items = document.getElementById('cart-items')
 item.focus()
 
 document.getElementById('submitBtn').addEventListener('click', function(){
@@ -37,7 +37,23 @@ onValue(cartItem, function(snapshot){
     let itemIds = Object.keys(snapshot.val())
     for(let i=0;i<itemValues.length;i++){
         let listElement = document.createElement("li")
-        listElement.textContent = itemValues[i]
+        let division = document.createElement('div')
+        let msgBox = document.createElement('span')
+        let delBtn = document.createElement('span')
+        msgBox.innerHTML = itemValues[i]
+        delBtn.innerHTML = '&#9940;'
+        division.append(msgBox,delBtn)
+        listElement.append(division)
         cart_items.append(listElement)
     }
+})
+
+document.getElementById('hideBtn').addEventListener('click', function(){
+    document.querySelector('.container').style.display = 'none'
+    document.querySelector('.hideContainer').style.display = 'none'
+    document.write('<img src="./cute-cat.gif"></img>')
+    document.body.style.display = 'flex'
+    document.body.style.justifyContent = 'center'
+    document.body.style.alignItems = 'center'
+    document.querySelector('img').style.maxWidth = '150px'
 })
