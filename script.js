@@ -16,67 +16,28 @@ const database = getDatabase(app)
 const cartItem = ref(database, "cart")
 var item = document.getElementById('cartValue')
 var cart_items = document.getElementById('cart-items')
-
-onValue(cartItem, function(snapshot){
-    if(snapshot.val() != null){
-        cart_items.innerHTML = null
-        let itemValues = Object.values(snapshot.val())
-        let itemIds = Object.keys(snapshot.val())
-        for(let i=0;i<itemValues.length;i++){
-            let listElement = document.createElement("li")
-            listElement.textContent = itemValues[i]
-            cart_items.append(listElement)
-            listElement.addEventListener('contextmenu', function(e){
-                const contextMenu = document.querySelector('.context-menu')
-                e.preventDefault()
-                showContextMenu(e,"block",itemIds[i],contextMenu)
-                window.addEventListener('click', () => contextMenu.style.display = 'none')
-            })
-        }
-    }
-    else{
-        cart_items.style.justifyContent = 'center'
-        cart_items.innerHTML = "No items"
-    }
-})
-
-function showContextMenu(e, display, selectedItem,contextMenu){
-    contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight : e.y
-    contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth : e.x
-    contextMenu.style.display = display
-    var option = document.querySelectorAll('.context-menu > #items > li')
-    for(let i=0;i<option.length;i++){
-        option[i].addEventListener('click', function(){
-            console.log(option[i].innerHTML)
-        })
-    }
-    // option.(element => {
-    //     element.addEventListener('click', function(){
-    //         (element.innerHTML.toLowerCase() == 'update') ? updateItem() : deleteItem(selectedItem)
-    //         return
-    //     })
-    //     return
-    // })
-    // window.addEventListener('click', () => contextMenu.style.display = 'none')
-    return
-}
-
-function updateItem(){
-    console.log("UPDATED")
-}
-
-function deleteItem(selectedItem){
-    remove(ref(database, "cart/"+selectedItem))
-}
+item.focus()
 
 document.getElementById('submitBtn').addEventListener('click', function(){
     if(item.value != ''){
         push(cartItem,item.value)
         item.value = ""
         item.focus()
-        item.click()
     }
 })
 
-item.focus()
-item.click()
+onValue(cartItem, function(snapshot){
+    if(snapshot.val() == null){
+        cart_items.style.justifyContent = 'center'
+        cart_items.innerHTML = "No items"
+        return
+    }
+    cart_items.innerHTML = null
+    let itemValues = Object.values(snapshot.val())
+    let itemIds = Object.keys(snapshot.val())
+    for(let i=0;i<itemValues.length;i++){
+        let listElement = document.createElement("li")
+        listElement.textContent = itemValues[i]
+        cart_items.append(listElement)
+    }
+})
