@@ -17,6 +17,7 @@ body{
     margin: 0px auto;
 }
 .container > #questionsList,
+.container > #questionsList > option,
 .container > input{
     border: 0px;
     border-radius: 20px;
@@ -25,15 +26,10 @@ body{
     font-weight: bolder;
 }
 .container > #questionsList,
+.container > #questionsList > option,
 .container > input[type=text]{
     background-color: #F0F0F0;
     color: #CCAAF7;
-}
-.container > #questionsList,
-.container > #questionsList > option{
-    width: 100%;
-    overflow-wrap: break-word;
-    overflow: hidden;
 }
 .container > input[type=submit]{
     background-color: #995CFA;
