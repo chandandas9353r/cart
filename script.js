@@ -28,7 +28,6 @@ document.getElementById('submitBtn').addEventListener('click', function(){
 
 onValue(cartItem, function(snapshot){
     if(snapshot.val() == null){
-        cart_items.style.justifyContent = 'center'
         cart_items.innerHTML = "No items"
         return
     }
@@ -45,6 +44,9 @@ onValue(cartItem, function(snapshot){
         division.append(msgBox,delBtn)
         listElement.append(division)
         cart_items.append(listElement)
+        delBtn.addEventListener('click', function(){
+            remove(ref(database,`cart/${itemIds[i]}/`))
+        })
     }
 })
 
