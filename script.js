@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js"
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js"
+import { getDatabase, ref, push, set, onValue, remove } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js"
 
 const appSettings = {
     apiKey: "AIzaSyB60K2X7Zzko6kUz1TZTlstUl61YTWtVGY",
@@ -13,40 +13,53 @@ const appSettings = {
 
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
-const cartItem = ref(database, "cart")
 let item = document.getElementById('cartValue')
 let cart_items = document.getElementById('cart-items')
 item.focus()
 
 document.getElementById('submitBtn').addEventListener('click', function(){
     if(item.value != ''){
-        push(cartItem,item.value)
+        push(ref(database, "cart/questions/"),item.value)
+        onValue(ref(database, "cart/questions/"), function(snapshot){
+            let length = Object.values(snapshot.val()).length
+            let key = Object.entries(snapshot.val())[length-1][0]
+            let value = Object.entries(snapshot.val())[length-1][1]
+            set(ref(database, `cart/${key}/`),{
+                'Question': value,
+                'Answer': ''
+            })
+        })
         item.value = ""
         item.focus()
     }
 })
 
-onValue(cartItem, function(snapshot){
+onValue(ref(database, "cart/questions/"), function(snapshot){
     if(snapshot.val() == null){
         cart_items.innerHTML = "No items"
         return
     }
-    cart_items.innerHTML = null
-    let itemValues = Object.values(snapshot.val())
+    let itemValues = Object.entries(snapshot.val())
     let itemIds = Object.keys(snapshot.val())
-    for(let i=0;i<itemValues.length;i++){
-        let listElement = document.createElement("li")
-        let division = document.createElement('div')
-        let msgBox = document.createElement('span')
-        let delBtn = document.createElement('span')
-        msgBox.innerHTML = itemValues[i]
-        delBtn.innerHTML = '&#9940;'
-        division.append(msgBox,delBtn)
-        listElement.append(division)
-        if(i%2 != 0) listElement.style.backgroundColor = 'yellow'
-        cart_items.append(listElement)
-        delBtn.addEventListener('click', function(){
-            remove(ref(database,`cart/${itemIds[i]}/`))
+    cart_items.innerHTML = null
+    for (let i = 0; i < itemValues.length; i++) {
+        onValue(ref(database, `cart/${itemIds[i]}/`), function(snapshot){
+            let listElement = document.createElement('li')
+            let questionSection = document.createElement('div')
+            let question = document.createElement('span')
+            let answerSection = document.createElement('div')
+            let answer = document.createElement('span')
+            let delBtn = document.createElement('span')
+            question.innerHTML = snapshot.val().Question
+            questionSection.append(question)
+            if(snapshot.val().Answer != ''){
+                answer.innerHTML = snapshot.val().Answer
+                delBtn.innerHTML = '&#9940;'
+                answerSection.append(answer,delBtn)
+            }
+            listElement.append(questionSection,answerSection)
+            if(i%2 != 0) listElement.style.backgroundColor = 'yellow'
+            cart_items.append(listElement)
         })
     }
 })
