@@ -50,7 +50,8 @@ onValue(ref(database, "cart/questions/"), function(snapshot){
             let answer = document.createElement('span')
             let delBtn = document.createElement('span')
             question.innerHTML = Object.entries(snapshot.val())[i][1].Question
-            questionSection.append(question)
+            delBtn.innerHTML = '&#9940;'
+            questionSection.append(question,delBtn)
             if(Object.entries(snapshot.val())[i][1].Answer != ''){
                 answer.innerHTML = Object.entries(snapshot.val())[i][1].Answer
                 delBtn.innerHTML = '&#9940;'
