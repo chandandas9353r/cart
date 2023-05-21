@@ -80,3 +80,8 @@ onValue(ref(database, `cart/questions/`), function (snapshot) {
         }
     })
 })
+
+document.getElementById('hideBtn').addEventListener('click', function(){
+    document.querySelector('.container').style.display = 'none'
+    document.querySelector('.hideContainer').style.display = 'none'
+})
