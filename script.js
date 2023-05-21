@@ -59,6 +59,11 @@ onValue(ref(database, "cart/questions/"), function(snapshot){
             listElement.append(questionSection,answerSection)
             if(i%2 != 0) listElement.style.backgroundColor = 'yellow'
             cart_items.append(listElement)
+            delBtn.addEventListener('click', function(){
+                console.log(Object.keys(snapshot.val())[i])
+                remove(ref(database, `cart/${Object.keys(snapshot.val())[i]}/`))
+                remove(ref(database, `cart/questions/${Object.keys(snapshot.val())[i]}/`))
+            })
         }
     })
 })
