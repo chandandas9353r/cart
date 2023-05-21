@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
-import { getDatabase, onValue, ref, update } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
+import { getDatabase, onValue, ref, update, remove } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
 
 const appSettings = {
     apiKey: "AIzaSyB60K2X7Zzko6kUz1TZTlstUl61YTWtVGY",
@@ -52,27 +52,31 @@ onValue(ref(database, `cart/questions/`), function (snapshot) {
         cart_items.innerHTML = "No items"
         return
     }
-    let itemValues = Object.entries(snapshot.val())
-    let itemIds = Object.keys(snapshot.val())
-    cart_items.innerHTML = null
-    for (let i = 0; i < itemValues.length; i++) {
-        onValue(ref(database, `cart/${itemIds[i]}/`), function(snapshot){
+    let length = Object.values(snapshot.val()).length
+    onValue(ref(database, "cart/"), function(snapshot){
+        cart_items.innerHTML = null
+        for(let i=0;i<length;i++){
             let listElement = document.createElement('li')
             let questionSection = document.createElement('div')
             let question = document.createElement('span')
             let answerSection = document.createElement('div')
             let answer = document.createElement('span')
             let delBtn = document.createElement('span')
-            question.innerHTML = snapshot.val().Question
+            question.innerHTML = Object.entries(snapshot.val())[i][1].Question
             questionSection.append(question)
-            if(snapshot.val().Answer != ''){
-                answer.innerHTML = snapshot.val().Answer
+            if(Object.entries(snapshot.val())[i][1].Answer != ''){
+                answer.innerHTML = Object.entries(snapshot.val())[i][1].Answer
                 delBtn.innerHTML = '&#9940;'
                 answerSection.append(answer,delBtn)
             }
             listElement.append(questionSection,answerSection)
             if(i%2 != 0) listElement.style.backgroundColor = 'yellow'
             cart_items.append(listElement)
-        })
-    }
+            delBtn.addEventListener('click', function(){
+                console.log(Object.keys(snapshot.val())[i])
+                remove(ref(database, `cart/${Object.keys(snapshot.val())[i]}/`))
+                remove(ref(database, `cart/questions/${Object.keys(snapshot.val())[i]}/`))
+            })
+        }
+    })
 })
